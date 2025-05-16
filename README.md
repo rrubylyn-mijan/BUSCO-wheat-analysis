@@ -9,11 +9,17 @@ Created by: Ruby Mijan
 
 STEP 1: Load Conda on HPC
 --------------------------
+Conda is a tool that helps you install software and manage environments without causing version conflicts.  
+It lets you keep your tools organized for each project.
+
 ml miniconda3/24.3.0
 
 
 STEP 2: Create and Activate a Mamba Environment
 -----------------------------------------------
+Mamba is a faster version of Conda. It works the same way but installs packages much quicker,  
+which is very helpful when setting up tools like BUSCO that have many dependencies.
+
 conda create --prefix /home/YOUR_USERNAME/miniconda_envs/mamba_env -c conda-forge mamba
 conda activate /home/YOUR_USERNAME/miniconda_envs/mamba_env
 
