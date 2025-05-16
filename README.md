@@ -1,53 +1,59 @@
-BUSCO 5.7.1 Genome Completeness Guide
+# BUSCO 5.7.1 Genome Completeness Guide
 ======================================
 
-This is a beginner-friendly guide to run BUSCO v5.7.1 (Benchmarking Universal Single-Copy Orthologs)
+> This is a beginner-friendly guide to run BUSCO v5.7.1 (Benchmarking Universal Single-Copy Orthologs)
 for genome completeness analysis and visualization.
 
 Created by: Ruby Mijan
 
 
-STEP 1: Load Conda on HPC
+## STEP 1: Load Conda on HPC
 --------------------------
-Conda is a tool that helps you install software and manage environments without causing version conflicts.  
-It lets you keep your tools organized for each project.
+> **Conda** is a tool that helps you install software and manage environments without causing version conflicts. It lets you keep your tools organized for each project.
 
+```bash
 ml miniconda3/24.3.0
+```
 
 
-STEP 2: Create and Activate a Mamba Environment
+## STEP 2: Create and Activate a Mamba Environment
 -----------------------------------------------
-Mamba is a faster version of Conda. It works the same way but installs packages much quicker,  
-which is very helpful when setting up tools like BUSCO that have many dependencies.
+> **Mamba** is a faster version of Conda. It works the same way but installs packages much quicker, which is very helpful when setting up tools like BUSCO that have many dependencies.
 
+```bash
 conda create --prefix /home/YOUR_USERNAME/miniconda_envs/mamba_env -c conda-forge mamba
 conda activate /home/YOUR_USERNAME/miniconda_envs/mamba_env
+```
 
 
-STEP 3: Install BUSCO Environment Using Mamba
+## STEP 3: Install BUSCO Environment Using Mamba
 ---------------------------------------------
+```bash
 mamba create --prefix /home/YOUR_USERNAME/miniconda_envs/busco_env -c conda-forge -c bioconda busco=5.7.1
+```
 
-
-STEP 4: Initialize and Activate BUSCO
+## STEP 4: Initialize and Activate BUSCO
 -------------------------------------
+```bash
 eval "$(mamba shell hook --shell bash)"
 mamba activate /home/YOUR_USERNAME/miniconda_envs/busco_env
 mamba shell init --shell bash --root-prefix=~/.local/share/mamba
 source ~/.bashrc
 mamba activate /home/YOUR_USERNAME/miniconda_envs/busco_env
+```
 
-
-STEP 5: Run BUSCO on a Genome
+## STEP 5: Run BUSCO on a Genome
 -----------------------------
+```bash
 busco -i /path/to/genome.fasta \
       -l poales_odb10 \
       -o busco_output_genome \
       -m genome
+```
 
-
-STEP 6: Visualize Results for a Single Genome
+## STEP 6: Visualize Results for a Single Genome
 ---------------------------------------------
+```bash
 mkdir /your_path/BUSCO_summaries_ggplot_genome
 
 scp /your_path/busco_output_genome/run_poales_odb10/short_summary.txt \
@@ -58,14 +64,17 @@ mv short_summary.txt short_summary.generic.poales_odb10.YourGenome.txt
 
 python3 /home/YOUR_USERNAME/miniconda_envs/busco_env/bin/generate_plot.py \
         -wd /your_path/BUSCO_summaries_ggplot_genome/
+```
 
-# Optional: Transfer to local computer (Windows example)
+### Optional: Transfer to local computer (Windows example)
+```bash
 scp first.last@atlas-login.hpc.msstate.edu:/your_path/BUSCO_summaries_ggplot_genome/busco_figure.png \
     C:\Users\first.last\Documents\BUSCO_figures
+```
 
-
-STEP 7: Combine and Visualize Multiple Genomes
+## STEP 7: Combine and Visualize Multiple Genomes
 ----------------------------------------------
+```bash
 mkdir /your_path/BUSCO_combined_genomes
 
 # Copy all short summary files
@@ -77,28 +86,34 @@ scp /your_path/short_summary.generic.poales_odb10.Genome2.txt \
 
 scp /your_path/short_summary.generic.poales_odb10.Genome3.txt \
     /your_path/BUSCO_combined_genomes/
+```
 
-# Generate combined plot
+## Generate combined plot
+```bash
 python3 /home/YOUR_USERNAME/miniconda_envs/busco_env/bin/generate_plot.py \
         -wd /your_path/BUSCO_combined_genomes/
+```
 
-# Download to local PC
+## Download to local PC
+```bash
 scp first.last@atlas-login.hpc.msstate.edu:/your_path/BUSCO_combined_genomes/busco_figure.png \
     C:\Users\first.last\Documents\BUSCO_figure
+```
 
-
-BONUS: Customize Plot Using R
+# BONUS: Customize Plot Using R
 -----------------------------
-# Copy R script and summary files
+## Copy R script and summary files
+```bash
 scp /your_path/BUSCO_combined_genomes/busco_figure.R \
     C:\Users\first.last\Documents\BUSCO_figures
 
 scp /your_path/BUSCO_combined_genomes/short_summary.generic.poales_odb10.*.txt \
     C:\Users\first.last\Documents\BUSCO_figures
+```
 
-
-Example Directory Structure
+# Example Directory Structure
 ---------------------------
+```bash
 BUSCO_project/
 ├── Genome FASTA files
 ├── BUSCO_combined_genomes/
@@ -109,7 +124,7 @@ BUSCO_project/
 ├── BUSCO_summaries_ggplot_genome/
 │   └── short_summary.generic.poales_odb10.YourGenome.txt
 └── busco_env/
-
+```
 
 Maintainer: Ruby Mijan (rrubylyn.mijan@gmail.com)
 
