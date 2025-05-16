@@ -1,14 +1,12 @@
 # BUSCO 5.7.1 Genome Completeness Guide
-======================================
 
-> This is a beginner-friendly guide to run BUSCO v5.7.1 (Benchmarking Universal Single-Copy Orthologs)
+This is a beginner-friendly guide to run BUSCO v5.7.1 (Benchmarking Universal Single-Copy Orthologs)
 for genome completeness analysis and visualization.
 
 Created by: Ruby Mijan
 
 
 ## STEP 1: Load Conda on HPC
---------------------------
 > **Conda** is a tool that helps you install software and manage environments without causing version conflicts. It lets you keep your tools organized for each project.
 
 ```bash
@@ -17,7 +15,6 @@ ml miniconda3/24.3.0
 
 
 ## STEP 2: Create and Activate a Mamba Environment
------------------------------------------------
 > **Mamba** is a faster version of Conda. It works the same way but installs packages much quicker, which is very helpful when setting up tools like BUSCO that have many dependencies.
 
 ```bash
@@ -27,13 +24,11 @@ conda activate /home/YOUR_USERNAME/miniconda_envs/mamba_env
 
 
 ## STEP 3: Install BUSCO Environment Using Mamba
----------------------------------------------
 ```bash
 mamba create --prefix /home/YOUR_USERNAME/miniconda_envs/busco_env -c conda-forge -c bioconda busco=5.7.1
 ```
 
 ## STEP 4: Initialize and Activate BUSCO
--------------------------------------
 ```bash
 eval "$(mamba shell hook --shell bash)"
 mamba activate /home/YOUR_USERNAME/miniconda_envs/busco_env
@@ -43,7 +38,6 @@ mamba activate /home/YOUR_USERNAME/miniconda_envs/busco_env
 ```
 
 ## STEP 5: Run BUSCO on a Genome
------------------------------
 ```bash
 busco -i /path/to/genome.fasta \
       -l poales_odb10 \
@@ -52,7 +46,6 @@ busco -i /path/to/genome.fasta \
 ```
 
 ## STEP 6: Visualize Results for a Single Genome
----------------------------------------------
 ```bash
 mkdir /your_path/BUSCO_summaries_ggplot_genome
 
@@ -73,7 +66,6 @@ scp first.last@atlas-login.hpc.msstate.edu:/your_path/BUSCO_summaries_ggplot_gen
 ```
 
 ## STEP 7: Combine and Visualize Multiple Genomes
-----------------------------------------------
 ```bash
 mkdir /your_path/BUSCO_combined_genomes
 
@@ -101,7 +93,6 @@ scp first.last@atlas-login.hpc.msstate.edu:/your_path/BUSCO_combined_genomes/bus
 ```
 
 # BONUS: Customize Plot Using R
------------------------------
 ## Copy R script and summary files
 ```bash
 scp /your_path/BUSCO_combined_genomes/busco_figure.R \
@@ -112,7 +103,6 @@ scp /your_path/BUSCO_combined_genomes/short_summary.generic.poales_odb10.*.txt \
 ```
 
 # Example Directory Structure
----------------------------
 ```bash
 BUSCO_project/
 ├── Genome FASTA files
