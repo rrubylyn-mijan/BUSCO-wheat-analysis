@@ -77,7 +77,7 @@ python3 /home/YOUR_USERNAME/miniconda_envs/busco_env/bin/generate_plot.py \
         -wd /your_path/BUSCO_combined_genomes/
 
 # Download to local PC
-scp rubylyn.infante@atlas-login.hpc.msstate.edu:/your_path/BUSCO_combined_genomes/busco_figure.png \
+scp first.last@atlas-login.hpc.msstate.edu:/your_path/BUSCO_combined_genomes/busco_figure.png \
     C:\Users\first.last\Documents\BUSCO_figure
 
 
